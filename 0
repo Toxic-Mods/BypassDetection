@@ -1,0 +1,43 @@
+local LastFunction = nil
+
+xpcall(function()
+   return game:ThisMethodDoesNotExist()
+end, function()
+   local func = debug.info(2, "f")
+
+   if LastFunction == nil then
+       LastFunction = func
+   end
+
+   if LastFunction ~= func then
+       -- This metamethod changed so it detects
+   end
+end)
+
+wait(0.1)
+game.StarterGui:SetCore("SendNotification", {
+Title = "Detection";
+Text = "Bypassed 1";
+Duration = 0.1;
+})
+wait(0.1)
+game:WaitForChild("CoreGui").RobloxGui:WaitForChild("NotificationFrame"):Destroy()
+wait(0.1)
+game.StarterGui:SetCore("SendNotification", {
+Title = "Detection";
+Text = "Bypassed 2";
+Duration = 0.1;
+})
+local a
+a = hookfunction(game.FindFirstChild, function(useless, whatweneed, stilluseless)
+if whatweneed == "NotificationFrame" then
+return
+end
+return a(useless,whatweneed,stilluseless)
+end)
+wait(0.1)
+game.StarterGui:SetCore("SendNotification", {
+Title = "Detection";
+Text = "Bypassed 3";
+Duration = 0.1;
+})
